@@ -5,7 +5,7 @@
   <arg name="z_pos" default="0.0"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="worlds/empty.world"/>
+    <arg name="world_name" value="$(find orne_gazebo)/worlds/Tsudanuma_2-3-without_door.world"/>
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
@@ -13,7 +13,8 @@
     <arg name="debug" value="false"/>
   </include>
   <include file="$(find orne_bringup)/launch/includes/robot_localization.launch"/>
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find orne_description)/urdf/$(arg model)/orne_$(arg model).urdf.xacro" />
+  <!-- <param name="robot_description" command="$(find xacro)/xacro inorder $(find orne_description)/urdf/$(arg model)/orne_$(arg model).urdf.xacro" /> -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find raspicat_description)/urdf/raspicat.urdf.xacro" />
 
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model orne_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
 
